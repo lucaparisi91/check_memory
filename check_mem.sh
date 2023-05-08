@@ -1,15 +1,28 @@
 #!/bin/bash
 
+set -e 
+
 interval=1 # N of seconds between memory queries
 nJobs=10 # N top jobs per memory usage to track
 base_filename=mem
 
+usage=$"$(basename "$0") [-h] [-t n] [-n n] \n
 
-while getopts n:t: flag
+where: \n
+    -h show this help text \n
+    -t sampling interval in seconds \n
+    -n number of top jobs per memory consumption to save \n
+"
+
+while getopts n:t:h flag
 do
     case "${flag}" in
-        t) interval=${OPTARG};;
-        n) nJobs=${OPTARG};;
+        t)  interval=${OPTARG};;
+        n)  nJobs=${OPTARG};;
+        h)  echo -e $usage 1>&2
+            exit 1
+            ;;
+
     esac
 done
 
