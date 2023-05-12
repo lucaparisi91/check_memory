@@ -3,8 +3,6 @@
 set -e 
 
 interval=1 # N of seconds between memory queries
-nJobs=10 # N top jobs per memory usage to track
-base_filename=mem
 record_per_process=0
 
 usage=$"$(basename "$0") [-h] [-t n] \n
@@ -33,9 +31,9 @@ done
 
 if [ $record_per_process == 1 ]
 then 
-    echo "Step Memory Pid Name" > "$base_filename.dat" 
+    echo "Step Memory Pid Name"
 else
-    echo "Step Memory" > "${base_filename}_sys.dat"
+    echo "Step Memory"
 fi
 
 i=1
@@ -44,10 +42,10 @@ do
     if [ $record_per_process == 1 ]
     then
     # saves memory usage per process from ps
-        ps -F | tail -n +2 | awk "{print $i,\$6,\$2,\$11 }"  >> "${base_filename}.dat"
+        ps -F | tail -n +2 | awk "{print $i,\$6,\$2,\$11 }"
     else
     # saves system wide memory usage
-        free --kilo | grep Mem | awk "{print $i,\$3}" >> "${base_filename}_sys.dat"
+        free --kilo | grep Mem | awk "{print $i,\$3}"
     fi
     sleep $interval
 
