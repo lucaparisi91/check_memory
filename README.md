@@ -4,3 +4,25 @@ You can find a more detailed description by typing
 ```bash 
 bash check_mem.sh -h
 ```
+## Running on muliple nodes 
+If you are using multiple nodes you need to launch the job on multiple nodes. You many need to oversubscribe the node. You can find an example script below for the SLURM scheduler
+
+```
+#!/bin/bash
+
+#SBATCH --job-name=MY_JOB_NAME
+#SBATCH --time=00:09:00
+#SBATCH --exclusive
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=5
+#SBATCH --cpus-per-task=1
+#SBATCH --partition=standard
+#SBATCH --qos=short
+
+srun --mem=1GB  --ntasks=2 --ntasks-per-node=1 --nodes=2  bash -c './check_mem.sh -t 1 > mem_${SLURMD_NODENAME}' &
+
+export OMP_NUM_THREADS=1
+srun --oversubscribe ./my_exec
+
+```
+
