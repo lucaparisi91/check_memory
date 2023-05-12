@@ -12,7 +12,7 @@ usage=$"$(basename "$0") [-h] [-t n] [-p] \n
 where: \n
     -h show this help text \n
     -t sampling interval in seconds. Must be an integer \n
-    -p record memory per user process.
+    -p record memory per user process. \n
     -m entries with memory above this thresold are ignored. Units in kilobites
 "
 
