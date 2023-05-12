@@ -5,7 +5,7 @@ set -e
 interval=1 # N of seconds between memory queries
 record_per_process=0
 
-usage=$"$(basename "$0") [-h] [-t n] \n
+usage=$"$(basename "$0") [-h] [-t n] [-p] \n
 
 where: \n
     -h show this help text \n
