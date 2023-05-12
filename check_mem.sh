@@ -13,7 +13,7 @@ where: \n
     -h show this help text \n
     -t sampling interval in seconds. Must be an integer \n
     -p record memory per user process.
-    -m entries with memory above this thresold are ignored
+    -m entries with memory above this thresold are ignored. Units in kilobites
 "
 
 while getopts m:pt:h flag
