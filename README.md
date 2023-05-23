@@ -19,10 +19,12 @@ If you are using multiple nodes you need to launch the job on multiple nodes. Yo
 #SBATCH --partition=standard
 #SBATCH --qos=short
 
-srun --mem=1GB  --ntasks=2 --ntasks-per-node=1 --nodes=2  bash -c './check_mem.sh -t 1 > mem_${SLURMD_NODENAME}' &
 
 export OMP_NUM_THREADS=1
-srun --oversubscribe ./my_exec
+
+srun --oversubscribe --mem=1GB  --ntasks=2 --ntasks-per-node=1 --nodes=2  bash -c './check_mem.sh -t 1 > mem_${SLURMD_NODENAME}' &
+srun --oversubscribe --mem=250GB ./my_exec
+
 
 ```
 
